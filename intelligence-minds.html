@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intelligence Minds Learning Institute</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<noscript><style>.blk{opacity:1!important}#auth{display:none!important}</style></noscript>
+<style>
+:root{--bg:#0a0a0b;--fg:#f4f4f5;--mut:#9a9aa3;--line:#2a2a30;--card:#111114;--blue:#3b82f6;--red:#ef4444;--green:#22c55e;--yellow:#facc15;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fafafa;--fg:#0e0e10;--mut:#5f5f69;--line:#d6d6db;--card:#fff;color-scheme:light}}
+:root[data-theme="dark"]{--bg:#0a0a0b;--fg:#f4f4f5;--mut:#9a9aa3;--line:#2a2a30;--card:#111114}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:31}
+.mono{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.sq{display:inline-block;width:8px;height:8px;background:var(--acc,var(--blue));margin-right:8px}
+nav{position:fixed;top:0;left:0;right:0;z-index:37;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) 5vw 12px;background:var(--bg);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);text-decoration:none;white-space:nowrap}.logo i{width:20px;height:20px;border-radius:5px;background:var(--blue)}
+.nl a{color:var(--mut);text-decoration:none;font-size:13px;margin:0 9px;padding-bottom:4px;border-bottom:2px solid transparent}.nl a:hover{color:var(--fg)}.nl a.act{color:var(--fg);border-bottom-color:var(--green)}
+#na{display:flex;gap:8px;align-items:center}
+@media(max-width:760px){.nl{display:none}}
+.pg{display:none;min-height:calc(100vh - 62px);min-height:calc(100svh - 62px);align-items:center;padding:100px 5vw 50px;position:relative}.pg.on{display:flex}
+footer{padding:18px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:12px;color:var(--mut)}footer b{color:var(--fg)}
+.wrap{width:100%;max-width:1180px;margin:auto}
+h1{font-size:clamp(36px,7vw,76px);line-height:1.02;letter-spacing:-.035em;font-weight:800;margin:14px 0 18px}
+h1 em,h2 em{font-style:normal;color:var(--acc)}
+h2{font-size:clamp(26px,5vw,50px);letter-spacing:-.025em;margin:10px 0 8px;line-height:1.1}
+h3{margin:6px 0;font-size:17px}
+.lead{color:var(--mut);max-width:580px;font-size:17px;margin:0}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;padding:13px 22px;border-radius:6px;font:600 14px Inter,sans-serif;text-decoration:none;border:1px solid var(--line);color:var(--fg);background:none;cursor:pointer;text-align:center}
+.btn.p{background:var(--acc,var(--blue));border-color:var(--acc,var(--blue));color:#06060a}
+.btn.s{padding:8px 14px;font-size:13px}.btn.full{width:100%;margin-top:16px}
+.btn:not(.p):hover{border-color:var(--red);color:var(--red)}
+.btn.ok{border-color:var(--green);color:var(--green);background:none;cursor:default}
+.card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--acc,var(--blue));border-radius:12px;padding:26px}
+label{display:block;margin-top:12px;font-size:12px;color:var(--mut)}
+input,select{width:100%;margin-top:6px;padding:12px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px;font:16px Inter,sans-serif}
+input:focus,select:focus{outline:2px solid var(--acc,var(--blue));border-color:var(--acc,var(--blue))}
+.err{color:var(--red);font-size:13px;min-height:18px;margin-top:10px}.err.g{color:var(--green)}
+.grid{display:grid;gap:14px;margin-top:28px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.stat{border:1px solid var(--line);border-top:3px solid var(--blue);padding:16px;border-radius:8px}
+.stat b{display:block;font-size:30px;color:var(--blue)}
+.stat:nth-child(2){border-top-color:var(--red)}.stat:nth-child(2) b{color:var(--red)}
+.stat:nth-child(3){border-top-color:var(--green)}.stat:nth-child(3) b{color:var(--green)}
+.stat:nth-child(4){border-top-color:var(--yellow)}.stat:nth-child(4) b{color:var(--yellow)}
+.prof{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:24px;max-width:640px}
+.av{width:54px;height:54px;border-radius:50%;background:var(--blue);display:grid;place-items:center;font:700 22px Inter;color:#06060a}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;width:100%}.kv b{display:block;font-weight:500;word-break:break-word}.kv .y{font-family:"JetBrains Mono",monospace;color:var(--yellow)}
+#rd{width:100%;height:auto;margin-top:22px;overflow:visible}
+.nd{cursor:pointer;outline:none}.nd circle{transition:.2s}.nd:hover circle,.nd:focus circle,.nd.on circle{stroke:var(--fg);stroke-width:3}
+.nd text{fill:#06060a;font:800 15px Inter,sans-serif;text-anchor:middle;dominant-baseline:central;pointer-events:none}.nd .lb{fill:var(--fg);font:600 13px Inter,sans-serif}
+.dash{animation:dsh 1s linear infinite}@keyframes dsh{to{stroke-dashoffset:-22}}
+#si{margin-top:16px;max-width:640px}#si p{margin:0;color:var(--mut);font-size:14px}
+.box{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--blue);border-radius:10px;padding:20px;transition:transform .2s,border-color .2s}
+.box:hover{transform:translateY(-3px);border-color:var(--red)}
+.box p{margin:0;color:var(--mut);font-size:14px}
+.cs{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.en{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.cs .box:nth-child(n+4){border-top-color:var(--red)}.cs .box>.mono{color:var(--blue)}.cs .box:nth-child(n+4)>.mono{color:var(--red)}
+.en .box:nth-child(2){border-top-color:var(--red)}.en .box:nth-child(3){border-top-color:var(--green)}
+.tag{display:inline-block;margin:12px 6px 12px 0;padding:3px 9px;border:1px solid var(--green);color:var(--green);border-radius:99px;font-size:11px}.tag+.tag{border-color:var(--yellow);color:var(--yellow)}
+.ct{text-align:center}.ct .lead{margin:0 auto}
+.who{font-size:clamp(20px,4vw,30px);font-weight:600;margin-top:18px}
+.num{display:block;font:600 clamp(32px,8vw,66px)/1.1 "JetBrains Mono",monospace;color:var(--blue);text-decoration:none;margin:6px 0}
+.talk{background:var(--green);border-color:var(--green);color:#06060a;font-size:16px;padding:16px 30px;margin-top:20px;animation:ring 1.8s infinite}
+.talk:hover{background:var(--green)!important;border-color:var(--green)!important;color:#06060a!important}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}100%{box-shadow:0 0 0 24px rgba(34,197,94,0)}}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:8px;animation:bl 1.2s infinite}@keyframes bl{50%{opacity:.2}}
+#auth{position:fixed;inset:0;z-index:36;display:none;place-items:center;background:var(--bg);padding:84px 16px 40px;overflow:auto}#auth.on{display:grid}
+.ap{width:100%;max-width:440px;position:relative}#x{position:absolute;top:12px;right:12px}
+#cred{border:1px solid var(--green);background:rgba(34,197,94,.08);border-radius:8px;padding:16px;margin-top:14px}
+#cred div{display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:14px}#cred b{font-family:"JetBrains Mono",monospace;color:var(--yellow)}
+.sw{margin:16px 0 0;font-size:13px;color:var(--mut);text-align:center}.sw a{color:var(--blue);cursor:pointer;font-weight:600}
+#pm{position:fixed;inset:0;z-index:65;display:none;place-items:center;background:rgba(0,0,0,.72);padding:16px}#pm.on{display:grid}
+#pm .card{width:100%;max-width:380px;--acc:var(--yellow)}.price{font:600 28px "JetBrains Mono",monospace;color:var(--yellow);margin:6px 0}
+.nd .sb{font:500 9.5px "JetBrains Mono",monospace;letter-spacing:.05em}.nd .ht{fill:#06060a;font:700 10px "JetBrains Mono",monospace;letter-spacing:.06em}
+.pl{fill:none;stroke:var(--yellow);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:pl 1.6s infinite}@keyframes pl{from{transform:scale(1);opacity:.9}to{transform:scale(1.9);opacity:0}}
+.cr{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;margin-top:8px;border-top:1px solid var(--line);font-size:14px}
+.hl{outline:2px solid var(--green);outline-offset:4px}
+/* effects */
+.blk{opacity:0;transition:opacity .25s}.blk.in,body.done .blk{opacity:1}
+#cv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.wire{position:absolute;border:1px solid var(--blue);background:rgba(59,130,246,.1);pointer-events:none;z-index:40;transition:opacity .25s}
+.wire.red{border-color:var(--red);background:rgba(239,68,68,.08)}.wire.gone{opacity:0}
+.wire:before{content:"";position:absolute;width:6px;height:6px;background:var(--blue);left:-3px;top:-3px;box-shadow:var(--w) 0 var(--blue)}.wire.red:before{background:var(--red);box-shadow:var(--w) 0 var(--red)}
+#wipe{position:fixed;inset:0;z-index:70;pointer-events:none;background:var(--bg);opacity:0;display:grid;place-items:center}
+#wl{color:var(--green);font:700 clamp(13px,2.6vw,22px) "JetBrains Mono",monospace;letter-spacing:.18em;text-align:center;padding:0 16px;position:relative;z-index:2}
+#rain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:71}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="wipe"><div id="wl"></div></div>
+<canvas id="rain"></canvas>
+
+<nav><a class="logo" href="#home" data-go="home"><i></i>Intelligence Minds</a>
+<div class="nl"><a href="#home" data-go="home">Home</a><a href="#roadmap" data-go="roadmap">Roadmap</a><a href="#courses" data-go="courses">Courses</a><a href="#enroll" data-go="enroll">Enroll</a><a href="#contact" data-go="contact">Contact</a></div>
+<div id="na"></div></nav>
+
+<section class="pg on" id="home" style="--acc:var(--blue)"><div class="wrap">
+  <div class="mono blk"><b class="sq"></b>Learning Institute · Now enrolling</div>
+  <h1 class="blk">Welcome to <em>Intelligence Minds</em> Learning Institute.</h1>
+  <p class="lead blk">A hands-on school for learning artificial intelligence and using it to create. Start from the fundamentals, finish with a portfolio of real AI-assisted content.</p>
+  <div id="guest" class="btns"><button class="btn p blk" data-open="signup">Sign up</button><button class="btn blk" data-open="signin">Sign in</button></div>
+  <div id="member" class="card prof blk" hidden><div class="av" id="pi">S</div><div><div style="font-size:18px;font-weight:600" id="pn">Student</div><div class="mono" id="pe">email</div></div>
+    <div class="kv"><div><span class="mono">Username</span><b class="y" id="pu">—</b></div><div><span class="mono">Phone</span><b id="pp">—</b></div><div><span class="mono">Member since</span><b id="pd">—</b></div></div></div>
+  <div class="grid stats">
+    <div class="stat blk"><b>6</b><span class="mono">Courses</span></div><div class="stat blk"><b>5</b><span class="mono">Roadmap stages</span></div>
+    <div class="stat blk"><b>100%</b><span class="mono">Hands-on projects</span></div><div class="stat blk"><b>1</b><span class="mono">Capstone portfolio</span></div>
+  </div>
+</div></section>
+
+<section class="pg" id="roadmap" style="--acc:var(--red)"><div class="wrap">
+  <div class="mono blk"><b class="sq"></b>Your learning path</div>
+  <h2 class="blk">The <em>roadmap.</em></h2>
+  <p class="lead blk">Five stages, each linked to its courses. Select a stop to see what’s unlocked and what’s next.</p>
+  <div class="mono blk" style="margin-top:14px"><span style="color:var(--green)">✓ Unlocked</span> · <span style="color:var(--yellow)">● You are here</span> · 🔒 Yet to unlock</div>
+  <svg id="rd" class="blk" viewBox="0 0 1100 300" role="img" aria-label="Learning roadmap"></svg>
+  <div id="si" class="card blk"></div>
+</div></section>
+
+<section class="pg" id="courses" style="--acc:var(--green)"><div class="wrap">
+  <div class="mono blk"><b class="sq"></b>What we teach</div>
+  <h2 class="blk">Courses in <em>AI learning</em> and content creation.</h2>
+  <p class="lead blk">Each course is KES 2,500. Sign in, then unlock the ones you want.</p>
+  <div class="grid cs" id="cg"></div>
+</div></section>
+
+<section class="pg" id="enroll" style="--acc:var(--yellow)"><div class="wrap">
+  <div class="mono blk"><b class="sq"></b>Next intake</div>
+  <h2 class="blk"><em>Enroll</em> in your course.</h2>
+  <p class="lead blk">Pick the option that fits you. We’ll confirm your place and send your start date.</p>
+  <div class="grid en">
+    <div class="box blk"><h3>Single course</h3><p>Choose any one course and learn with live projects.</p></div>
+    <div class="box blk"><h3>Learning track</h3><p>Take the three AI Learning or three Content Creation courses in sequence.</p></div>
+    <div class="box blk"><h3>Full roadmap</h3><p>All six courses plus the capstone portfolio and certificate.</p></div>
+  </div>
+  <div class="btns"><a class="btn p blk" href="#courses" data-go="courses">Browse &amp; unlock courses</a><a class="btn blk" href="#contact" data-go="contact">Talk to us</a></div>
+</div></section>
+
+<section class="pg" id="contact" style="--acc:var(--blue)"><div class="wrap ct">
+  <div class="mono blk"><b class="sq"></b>Get in touch</div>
+  <h2 class="blk">Have questions? <em>Let’s talk.</em></h2>
+  <p class="lead blk">Reach out directly. We’re here to help you navigate your AI journey.</p>
+  <div class="who blk" data-scr="Nelson Lewis">Nelson Lewis</div>
+  <div class="mono blk">Student Advisor</div>
+  <a class="num blk" href="tel:0797912293" data-scr="0797912293">0797912293</a>
+  <div class="mono blk"><span class="dot"></span>Online · Nairobi, Kenya</div>
+  <div class="blk"><a class="btn talk" href="tel:0797912293">Talk to Nelson</a></div>
+</div></section>
+
+<footer class="blk"><span>© 2026 Intelligence Minds Learning Institute</span><span>Designed by <b>Nelson Lewis</b> using reverse engineering and motion animation.</span></footer>
+
+<div id="auth"><div class="card ap">
+  <button class="btn s" id="x" aria-label="Close">✕</button>
+  <div class="panel" data-m="signup" hidden>
+    <div class="mono blk">New student</div><h2 class="blk">Sign up</h2>
+    <label class="blk">Full name<input id="rn" autocomplete="name" placeholder="e.g. Jane Wanjiku"></label>
+    <label class="blk">Email address<input id="rm" type="email" autocomplete="email" placeholder="you@example.com"></label>
+    <label class="blk">Phone number<input id="rp" type="tel" autocomplete="tel" placeholder="07XX XXX XXX"></label>
+    <button class="btn p full blk" id="rb">Create account &amp; get credentials</button>
+    <div class="err" id="rer"></div>
+    <div id="cred" hidden><div><span>Username</span><b id="gu">—</b></div><div><span>Password</span><b id="gp">—</b></div>
+      <p class="mono" style="margin:8px 0 10px">Save these now. The password is shown only once.</p><button class="btn p s" id="goin">Sign in now</button></div>
+    <p class="sw blk">Already a student? <a data-open="signin">Sign in</a></p>
+  </div>
+  <div class="panel" data-m="signin" hidden>
+    <div class="mono blk">Welcome back</div><h2 class="blk">Sign in</h2>
+    <label class="blk">Username<input id="su" autocomplete="username" placeholder="e.g. IM-4821"></label>
+    <label class="blk">Password<input id="sp" type="password" autocomplete="current-password" placeholder="Your password"></label>
+    <button class="btn p full blk" id="sb">Sign in</button>
+    <div class="err" id="ser"></div>
+    <p class="sw blk">New here? <a data-open="signup">Create an account</a></p>
+  </div>
+</div></div>
+
+<div id="pm"><div class="card"><div class="mono">Unlock course</div><h3 id="pmn">Course</h3><div class="price">KES 2,500</div>
+  <input id="mp" placeholder="M-Pesa code (demo: any code works)" maxlength="12">
+  <div class="btns"><button class="btn p" id="pay">Pay &amp; unlock</button><button class="btn" id="pc">Cancel</button></div><div class="err" id="pme"></div></div></div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)],rnd=n=>Math.random()*n|0;
+const FX=!matchMedia('(prefers-reduced-motion: reduce)').matches,C=['#3b82f6','#ef4444','#22c55e','#facc15'];
+const ls={g(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const sha=async s=>window.crypto&&crypto.subtle?[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))].map(b=>b.toString(16).padStart(2,'0')).join(''):s;
+let gate=0,me=null,W=innerWidth,H=innerHeight,cur='home',tgt='home',sel=0;
+const cv=$('#cv'),rc=$('#rain'),wipe=$('#wipe'),wl=$('#wl'),pages=all('.pg'),dpr=Math.min(devicePixelRatio||1,2);
+const NAMES={home:'HOME',roadmap:'ROADMAP',courses:'COURSES',enroll:'ENROLL',contact:'CONTACT'};
+function scr(el,txt){if(!FX){el.textContent=txt;return}const ch='01<>/\\#$%&*',t0=performance.now();(function f(){const p=Math.min((performance.now()-t0)/600,1);el.textContent=[...txt].map((c,i)=>c===' '||i<p*txt.length?c:ch[rnd(ch.length)]).join('');if(p<1)requestAnimationFrame(f)})()}
+/* green digit-rain transition */
+const rx=rc.getContext('2d'),cx=cv.getContext('2d');let rainEnd=0,rainRun=0,cols=[];
+function rs(){W=innerWidth;H=innerHeight;[cv,rc].forEach(c=>{c.width=W*dpr;c.height=H*dpr;c.getContext('2d').setTransform(dpr,0,0,dpr,0,0)})}
+function rain(){rx.globalCompositeOperation='destination-out';rx.fillStyle='rgba(0,0,0,.14)';rx.fillRect(0,0,W,H);rx.globalCompositeOperation='source-over';rx.font='14px "JetBrains Mono",monospace';
+  for(const c of cols){c.y+=c.v;rx.fillStyle='#bbf7d0';rx.fillText('0123456789ABCDEF'[rnd(16)],c.x,c.y);rx.fillStyle='#22c55e';rx.fillText('01'[rnd(2)],c.x,c.y-14);if(c.y>H+20)c.y=-rnd(200)}
+  if(performance.now()<rainEnd)requestAnimationFrame(rain);else{rainRun=0;rx.clearRect(0,0,W,H)}}
+function tech(label,mid){if(!FX){mid&&mid();return}
+  rainEnd=performance.now()+950;cols=Array.from({length:Math.ceil(W/16)},(_,i)=>({x:i*16,y:-rnd(500),v:8+rnd(10)}));if(!rainRun){rainRun=1;rain()}
+  scr(wl,'> '+label);wipe.animate([{opacity:0},{opacity:1,offset:.35},{opacity:1,offset:.65},{opacity:0}],{duration:900});
+  if(mid)setTimeout(mid,450)}
+if(FX)document.addEventListener('mouseover',e=>{const t=e.target.closest('nav a,.btn,.box h3,[data-scr]');if(t&&!t._s&&!t.children.length){t._s=1;scr(t,t.dataset.scr||t.textContent);setTimeout(()=>t._s=0,700)}});
+/* pages */
+function show(n,hl){pages.forEach(p=>p.classList.toggle('on',p.id===n));cur=n;scrollTo(0,0);all('.nl a').forEach(a=>a.classList.toggle('act',a.dataset.go===n));gate=performance.now()+250;
+  if(hl!=null){const c=$('#course-'+hl);if(c){c.scrollIntoView({block:'center'});c.classList.add('hl');setTimeout(()=>c.classList.remove('hl'),3000)}}}
+function go(n,hl){if(!NAMES[n]||(n===tgt&&hl==null))return;tgt=n;if(location.hash!=='#'+n)location.hash=n;if(n===cur){show(n,hl);return}tech('ACCESSING '+NAMES[n],()=>show(n,hl))}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+/* auth */
+function setUser(u){me=u;$('#guest').hidden=!!u;$('#member').hidden=!u;
+  $('#na').innerHTML=u?'<span class="mono" style="color:var(--green)">'+u.username+'</span><button class="btn s" data-out>Log out</button>':'<button class="btn s" data-open="signin">Sign in</button><button class="btn p s" data-open="signup">Sign up</button>';
+  if(u){$('#pi').textContent=u.name[0].toUpperCase();$('#pn').textContent=u.name;$('#pe').textContent=u.email;$('#pu').textContent=u.username;$('#pp').textContent=u.phone;$('#pd').textContent=new Date(u.created).toLocaleDateString('en-KE',{year:'numeric',month:'short',day:'numeric'})}
+  const h=states().findIndex(s=>s.here);sel=h<0?4:h;upd()}
+function mode(m,msg){all('.panel').forEach(p=>p.hidden=p.dataset.m!==m);$('#cred').hidden=true;$('#rer').textContent='';const e=$('#ser');e.textContent=msg||'';e.className='err';gate=performance.now()+60}
+function openAuth(m,msg){if($('#auth').classList.contains('on'))return mode(m,msg);
+  tech(m==='signup'?'SIGN UP // NEW USER':'SIGN IN // AUTH',()=>{$('#auth').classList.add('on');document.documentElement.style.overflow='hidden';mode(m,msg)})}
+function closeAuth(label,after){tech(label,()=>{$('#auth').classList.remove('on');document.documentElement.style.overflow='';after&&after()})}
+document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o){e.preventDefault();openAuth(o.dataset.open)}
+  const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go,g.dataset.hl==null?null:+g.dataset.hl)}
+  if(e.target.closest('[data-out]')){ls.s('im_s',null);tech('SESSION CLOSED',()=>setUser(null))}
+  const c=e.target.closest('[data-c]');if(c)unlock(+c.dataset.c)});
+$('#x').onclick=()=>closeAuth('CLOSING');
+addEventListener('keydown',e=>{if(e.key==='Escape'){$('#pm').classList.remove('on');if($('#auth').classList.contains('on'))closeAuth('CLOSING')}
+  if(e.key==='Enter'){const p=e.target.closest&&e.target.closest('.panel');if(p)p.querySelector('.btn.p.full').click()}});
+$('#rb').onclick=async()=>{const n=$('#rn').value.trim(),m=$('#rm').value.trim(),p=$('#rp').value.trim(),er=$('#rer'),us=ls.g('im_users',[]);
+  if(n.length<2||!/^\S+@\S+\.\S+$/.test(m)||!/^[\d+\s-]{9,15}$/.test(p)){er.textContent='Please enter your name, a valid email and a phone number.';return}
+  if(us.some(u=>u.email.toLowerCase()===m.toLowerCase())){er.textContent='An account with this email already exists. Please sign in.';return}
+  let un;do{un='IM-'+(1000+rnd(9000))}while(us.some(u=>u.username===un));
+  const A='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';let pw='';for(const v of crypto.getRandomValues(new Uint32Array(8)))pw+=A[v%A.length];
+  us.push({name:n,email:m,phone:p,username:un,hash:await sha(pw),created:new Date().toISOString()});ls.s('im_users',us);
+  er.textContent='';$('#cred').hidden=false;scr($('#gu'),un);scr($('#gp'),pw);['rn','rm','rp'].forEach(i=>$('#'+i).value='')};
+$('#goin').onclick=()=>{const u=$('#gu').textContent,p=$('#gp').textContent;mode('signin');$('#su').value=u;$('#sp').value=p};
+$('#sb').onclick=async()=>{const un=$('#su').value.trim().toUpperCase(),h=await sha($('#sp').value),u=ls.g('im_users',[]).find(x=>x.username===un&&x.hash===h),er=$('#ser');
+  if(!u){er.className='err';er.textContent='Invalid username or password. Please try again.';return}
+  ls.s('im_s',u.username);$('#sp').value='';closeAuth('ACCESS GRANTED',()=>setUser(u))};
+/* courses */
+const CR=[['AI Fundamentals','AI Learning','Understand machine learning, language models and responsible AI use.','Beginner','4 weeks'],['Prompt Engineering','AI Learning','Master prompting with Claude, OpenAI and DeepSeek for work and study.','Beginner','3 weeks'],['AI in Education','AI Learning','Lesson planning, assessment and personalised learning with AI.','Intermediate','4 weeks'],['AI Image & Design','Content Creation','Create visuals and brand assets with Nano Banana and Higgsfield.','Beginner','4 weeks'],['AI Video & Motion','Content Creation','Script, generate and edit short-form video with Seedance and more.','Intermediate','5 weeks'],['Social & Brand Content','Content Creation','Plan, create and schedule AI-powered content for Instagram and TikTok.','Intermediate','4 weeks']];
+const CS=[0,1,3,2,2,3];
+$('#cg').innerHTML=CR.map((c,i)=>'<div class="box blk" id="course-'+i+'"><span class="mono">Stage 0'+(CS[i]+1)+' · '+c[1]+'</span><h3>'+c[0].replace('&','&amp;')+'</h3><p>'+c[2]+'</p><span class="tag">'+c[3]+'</span><span class="tag">'+c[4]+'</span><br><button class="btn p s" data-c="'+i+'"></button></div>').join('');
+const ul=()=>me?ls.g('im_u_'+me.username,[]):[];
+let pi=-1;function unlock(i){if(!me)return openAuth('signin','Sign in to unlock courses.');if(ul().includes(i))return;
+  pi=i;$('#pmn').textContent=CR[i][0];$('#mp').value='';$('#pme').textContent='';$('#pm').classList.add('on')}
+$('#pc').onclick=()=>$('#pm').classList.remove('on');
+$('#pay').onclick=()=>{const e=$('#pme');if($('#mp').value.trim().length<4){e.className='err';e.textContent='Enter an M-Pesa code (at least 4 characters).';return}
+  ls.s('im_u_'+me.username,[...ul(),pi]);e.className='err g';e.textContent='Unlocked!';upd();setTimeout(()=>$('#pm').classList.remove('on'),700)};
+/* roadmap linked to courses */
+const P=[[80,210],[310,90],[550,200],[790,90],[1020,190]],D='M80,210 C190,210 200,90 310,90 C420,90 440,200 550,200 C660,200 680,90 790,90 C900,90 920,190 1020,190';
+const STG=[['Foundations','What AI is, how models work and the tools landscape.',[0]],['Prompting','Write clear prompts and build repeatable workflows.',[1]],['Create','Generate images, video, copy and design with AI tools.',[3,4]],['Apply','Use AI in education, marketing and daily work.',[2,5]],['Capstone','Ship a portfolio project and earn your certificate. Unlocks when all six courses are unlocked.',[0,1,2,3,4,5]]];
+function states(){const u=ul(),dn=STG.map(s=>s[2].every(c=>u.includes(c))),h=dn.indexOf(false);return STG.map((s,i)=>({cnt:s[2].filter(c=>u.includes(c)).length,here:i===h,st:dn[i]?'done':i===h?'here':'lock'}))}
+const sub=(s,i)=>s.st==='done'?'UNLOCKED ✓':s.st==='here'?'YOU ARE HERE':'YET TO UNLOCK'+(s.cnt?' '+s.cnt+'/'+STG[i][2].length:'');
+const col=s=>s.st==='done'?'var(--green)':s.st==='here'?'var(--yellow)':'var(--mut)';
+function drawRoad(){const S=states();$('#rd').innerHTML='<path d="'+D+'" fill="none" stroke="var(--line)" stroke-width="22" stroke-linecap="round"/><path class="dash" d="'+D+'" fill="none" stroke="var(--mut)" stroke-width="2" stroke-dasharray="10 12"/>'+
+  P.map((p,i)=>{const s=S[i];return '<g class="nd'+(i===sel?' on':'')+'" data-n="'+i+'" tabindex="0" role="button" aria-label="Stage '+(i+1)+' '+STG[i][0]+', '+sub(s,i)+'" transform="translate('+p+')">'+(s.here?'<circle class="pl" r="24"/>':'')+
+  '<circle r="24" fill="'+(s.st==='lock'?'var(--line)':col(s))+'"/><text'+(s.st==='lock'?' style="fill:var(--mut)"':'')+'>'+(s.st==='done'?'✓':s.st==='lock'?'🔒':'0'+(i+1))+'</text><text class="lb" y="46">'+STG[i][0]+'</text><text class="sb" y="62" style="fill:'+col(s)+'">'+sub(s,i)+'</text>'+
+  (s.here?'<g transform="translate(0,-58)"><rect x="-54" y="-12" width="108" height="22" rx="4" fill="var(--yellow)"/><path d="M-6,10 L0,17 L6,10Z" fill="var(--yellow)"/><text class="ht" y="-1">YOU ARE HERE</text></g>':'')+'</g>'}).join('')}
+function showStage(i){sel=i;const S=states()[i],g=STG[i],u=ul();
+  $('#si').innerHTML='<div class="mono" style="color:'+col(S)+'">Stage 0'+(i+1)+' · '+(S.st==='done'?'Unlocked ✓':S.st==='here'?'You are here':'Yet to unlock')+'</div><h3 style="font-size:20px">'+g[0]+'</h3><p>'+g[1]+'</p>'+
+  (i<4?g[2].map(c=>'<div class="cr"><span>'+CR[c][0].replace('&','&amp;')+'</span>'+(u.includes(c)?'<a class="btn s ok" data-go="courses" data-hl="'+c+'" href="#courses">Unlocked ✓ · View</a>':'<a class="btn p s" data-go="courses" data-hl="'+c+'" href="#courses">Yet to unlock · Open</a>')+'</div>').join(''):'<div class="cr"><span>'+S.cnt+'/6 courses unlocked</span><a class="btn p s" data-go="courses" href="#courses">Go to courses</a></div>');
+  all('.nd').forEach(n=>n.classList.toggle('on',+n.dataset.n===i))}
+$('#rd').addEventListener('click',e=>{const g=e.target.closest('.nd');if(g){showStage(+g.dataset.n);scr($('#si h3'),STG[sel][0])}});
+$('#rd').addEventListener('keydown',e=>{const g=e.target.closest('.nd');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showStage(+g.dataset.n)}});
+function upd(){const u=ul();all('[data-c]').forEach(b=>{const o=u.includes(+b.dataset.c);b.textContent=o?'Unlocked ✓':'Unlock · KES 2,500';b.classList.toggle('ok',o);b.classList.toggle('p',!o)});drawRoad();showStage(sel)}
+/* start */
+setUser(ls.g('im_users',[]).find(u=>u.username===ls.g('im_s',null))||null);
+{const h=location.hash.slice(1);cur=tgt=NAMES[h]?h:'home';show(cur)}
+const blks=all('.blk');
+if(!FX){document.body.classList.add('done');[cv,rc,wipe].forEach(e=>e.remove());return}
+rs();addEventListener('resize',rs);gate=performance.now()+700;
+/* cursor-following effect: soft trail + a few agent cursors */
+let mx=W/2,my=H/2,seen=0,focus=null,ft;const trail=[];
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;seen=1;trail.push({x:mx,y:my,t:1});if(trail.length>12)trail.shift()});
+const N=18,ag=[];for(let i=0;i<N;i++)ag.push({x:Math.random()*W,y:Math.random()*H,a:0,al:0,c:[...C,'#60a5fa','#f87171','#4ade80'][i%7],tx:W/2,ty:H/2,t:0});
+function aim(a){if(focus){const r=focus.getBoundingClientRect();a.tx=r.left+Math.random()*r.width;a.ty=r.top+Math.random()*r.height}else{const t=performance.now()/700+a.t*9,R=40+(a.t*97%50);a.tx=mx+Math.cos(t)*R;a.ty=my+Math.sin(t)*R}}
+(function frame(){cx.clearRect(0,0,W,H);
+  trail.forEach((p,i)=>{p.t-=.07;if(p.t>0){cx.globalAlpha=p.t*.55;cx.fillStyle=i%2?C[2]:C[0];cx.beginPath();cx.arc(p.x,p.y,1.5+p.t*2.5,0,6.3);cx.fill()}});while(trail.length&&trail[0].t<=0)trail.shift();
+  ag.forEach((a,i)=>{a.t+=.01;if(Math.random()<.1)aim(a);const dx=a.tx-a.x,dy=a.ty-a.y;a.x+=dx*.16+Math.sin(a.t*5)*.6;a.y+=dy*.16+Math.cos(a.t*4)*.6;if(Math.abs(dx)+Math.abs(dy)>3)a.a=Math.atan2(dy,dx);
+    a.al+=((focus?1:(seen&&i<6?.85:0))-a.al)*.12;if(a.al<.03)return;
+    cx.save();cx.globalAlpha=a.al;cx.translate(a.x,a.y);cx.rotate(a.a-.6);cx.fillStyle=a.c;cx.beginPath();cx.moveTo(0,0);cx.lineTo(4,15);cx.lineTo(7,10);cx.lineTo(13,9);cx.closePath();cx.fill();cx.restore()});
+  cx.globalAlpha=1;requestAnimationFrame(frame)})();
+/* wireframe build, replays whenever a block enters view (scrolling up or down) */
+function wire(el){const r=el.getBoundingClientRect(),d=document.createElement('div');d.className='wire';d.style.cssText='left:'+(r.left+scrollX)+'px;top:'+(r.top+scrollY)+'px;width:'+r.width+'px;height:'+r.height+'px;--w:'+Math.round(r.width)+'px';document.body.appendChild(d);return d}
+const q=[];
+function wireUp(el){focus=el;clearTimeout(ft);ft=setTimeout(()=>focus=null,800);const w=wire(el);
+  setTimeout(()=>w.classList.add('red'),90);
+  setTimeout(()=>{w.classList.add('gone');setTimeout(()=>w.remove(),260);if(!el._v)return;el.classList.add('in');if(el.dataset.scr)scr(el,el.dataset.scr)},220)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{const el=e.target;
+  if(e.isIntersecting){el._v=true;if(!el.classList.contains('in')&&!q.includes(el))q.push(el)}
+  else{el._v=false;el.classList.remove('in');const k=q.indexOf(el);if(k>-1)q.splice(k,1)}}),{threshold:.05});
+blks.forEach(b=>io.observe(b));
+setInterval(()=>{if(performance.now()>gate)for(let k=0;k<2&&q.length;k++)wireUp(q.shift())},40);
+})();
+</script>
+</body>
+</html>
