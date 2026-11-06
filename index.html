@@ -172,7 +172,7 @@ input:focus,select:focus{outline:2px solid var(--acc,var(--blue));border-color:v
   </div>
   <div class="panel" data-m="signin" hidden>
     <div class="mono blk">Welcome back</div><h2 class="blk">Sign in</h2>
-    <label class="blk">Email address<input id="su" type="email" autocomplete="email" placeholder="The email you registered with"></label>
+    <label class="blk">Username<input id="su" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Enter your username" maxlength="24"></label>
     <label class="blk">Password<div class="password-field"><input id="sp" type="password" autocomplete="current-password" placeholder="Your password"><button class="btn s" type="button" data-toggle-password="sp">Show</button></div></label>
     <button class="btn p full blk" id="sb">Sign in</button>
     <div class="err" id="ser"></div>
@@ -260,15 +260,20 @@ $('#rb').onclick=async()=>{
 };
 $('#goin').onclick=()=>{mode('signin','Account created. If email confirmation is enabled, confirm your address before signing in.');$('#su').value=pendingSignupEmail};
 $('#sb').onclick=async()=>{
- const email=$('#su').value.trim(),password=$('#sp').value,er=$('#ser');
+ const username=$('#su').value.trim(),password=$('#sp').value,er=$('#ser');
+ if(!/^[A-Za-z0-9_]{3,24}$/.test(username)){er.textContent='Enter your username.';return}
  if(password.length<6){er.textContent='Password must be at least 6 characters.';return}
- $('#sb').disabled=true;$('#sb').textContent='Signing in…';
- const {data,error}=await supabase.auth.signInWithPassword({email,password});
- $('#sb').disabled=false;$('#sb').textContent='Sign in';
- if(error){er.className='err';er.textContent=/rate.?limit|too many requests/i.test(error.message)?'Too many sign-in attempts. Please wait briefly and try again.':error.message;return}
- const {data:profile,error:pe}=await supabase.from('profiles').select('username,full_name,phone,created_at').eq('id',data.user.id).single();
- if(pe){er.textContent='Signed in, but your student profile could not be loaded. Please contact support.';return}
- $('#sp').value='';closeAuth('ACCESS GRANTED',()=>setUser({...profile,email:data.user.email}));
+ $('#sb').disabled=true;$('#sb').textContent='Signing in…';er.textContent='';
+ try{
+  const {data:tokens,error}=await supabase.functions.invoke('student-username-login',{body:{username,password}});
+  if(error||!tokens?.access_token||!tokens?.refresh_token)throw new Error(tokens?.error||error?.message||'Unable to sign in. Please try again.');
+  const {data:sessionData,error:sessionError}=await supabase.auth.setSession({access_token:tokens.access_token,refresh_token:tokens.refresh_token});
+  if(sessionError||!sessionData.user)throw new Error(sessionError?.message||'Unable to establish your session. Please try again.');
+  const {data:profile,error:profileError}=await supabase.from('profiles').select('username,full_name,phone,created_at').eq('id',sessionData.user.id).single();
+  if(profileError)throw new Error('Signed in, but your student profile could not be loaded. Please contact support.');
+  $('#sp').value='';closeAuth('ACCESS GRANTED',()=>setUser({...profile,email:sessionData.user.email}));
+ }catch(e){er.className='err';er.textContent=/rate.?limit|too many requests/i.test(e.message)?'Too many sign-in attempts. Please wait briefly and try again.':'Invalid username or password.'}
+ finally{$('#sb').disabled=false;$('#sb').textContent='Sign in'}
 };
 async function restoreSession(){
  const {data}=await supabase.auth.getSession();if(!data.session){setUser(null);return}
