@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -39,6 +39,7 @@ h3{margin:6px 0;font-size:17px}
 label{display:block;margin-top:12px;font-size:12px;color:var(--mut)}
 input,select{width:100%;margin-top:6px;padding:12px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px;font:16px Inter,sans-serif}
 input:focus,select:focus{outline:2px solid var(--acc,var(--blue));border-color:var(--acc,var(--blue))}
+.password-field{display:flex;align-items:stretch;gap:7px;margin-top:6px}.password-field input{margin-top:0;min-width:0;flex:1}.password-field button{margin-top:0;white-space:nowrap;padding:0 12px;font-size:12px}
 .err{color:var(--red);font-size:13px;min-height:18px;margin-top:10px}.err.g{color:var(--green)}
 .grid{display:grid;gap:14px;margin-top:28px}
 .stats{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
@@ -162,7 +163,8 @@ input:focus,select:focus{outline:2px solid var(--acc,var(--blue));border-color:v
 <label class="blk">Choose username<input id="ru" autocomplete="username" placeholder="3–24 letters, numbers or _" maxlength="24"></label><div class="err" id="rue"></div>
     <label class="blk">Email address<input id="rm" type="email" autocomplete="email" placeholder="you@example.com"></label>
     <label class="blk">Phone number<input id="rp" type="tel" autocomplete="tel" placeholder="07XX XXX XXX"></label>
-<label class="blk">Password<input id="rpass" type="password" autocomplete="new-password" minlength="6" placeholder="At least 6 characters"></label>
+<label class="blk">Password<div class="password-field"><input id="rpass" type="password" autocomplete="new-password" minlength="6" placeholder="At least 6 characters"><button class="btn s" type="button" data-toggle-password="rpass">Show</button></div></label>
+<label class="blk">Confirm password<div class="password-field"><input id="rpass2" type="password" autocomplete="new-password" minlength="6" placeholder="Enter your password again"><button class="btn s" type="button" data-toggle-password="rpass2">Show</button></div></label>
     <button class="btn p full blk" id="rb">Create account &amp; get credentials</button>
     <div class="err" id="rer"></div>
     <div id="cred" hidden><div><span>Your username</span><b id="gu">—</b></div><p class="mono" style="margin:8px 0 10px">Account created. Confirm your email if prompted, then sign in with your email and password.</p><button class="btn p s" id="goin">Go to sign in</button></div>
@@ -171,7 +173,7 @@ input:focus,select:focus{outline:2px solid var(--acc,var(--blue));border-color:v
   <div class="panel" data-m="signin" hidden>
     <div class="mono blk">Welcome back</div><h2 class="blk">Sign in</h2>
     <label class="blk">Email address<input id="su" type="email" autocomplete="email" placeholder="The email you registered with"></label>
-    <label class="blk">Password<input id="sp" type="password" autocomplete="current-password" placeholder="Your password"></label>
+    <label class="blk">Password<div class="password-field"><input id="sp" type="password" autocomplete="current-password" placeholder="Your password"><button class="btn s" type="button" data-toggle-password="sp">Show</button></div></label>
     <button class="btn p full blk" id="sb">Sign in</button>
     <div class="err" id="ser"></div>
     <p class="sw blk">New here? <a data-open="signup">Create an account</a></p>
@@ -226,6 +228,7 @@ document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if
 $('#x').onclick=()=>closeAuth('CLOSING');
 addEventListener('keydown',e=>{if(e.key==='Escape'){$('#pm').classList.remove('on');if($('#auth').classList.contains('on'))closeAuth('CLOSING')}
   if(e.key==='Enter'){const p=e.target.closest&&e.target.closest('.panel');if(p)p.querySelector('.btn.p.full').click()}});
+document.addEventListener('click',e=>{const toggle=e.target.closest('[data-toggle-password]');if(!toggle)return;const input=document.getElementById(toggle.dataset.togglePassword);if(!input)return;const visible=input.type==='password';input.type=visible?'text':'password';toggle.textContent=visible?'Hide':'Show';toggle.setAttribute('aria-label',visible?'Hide password':'Show password')});
 let usernameTimer=null;
 async function checkUsername(){
  const value=$('#ru').value.trim(),box=$('#rue');
@@ -239,25 +242,28 @@ async function checkUsername(){
 }
 $('#ru').addEventListener('input',()=>{clearTimeout(usernameTimer);$('#rue').textContent='';usernameTimer=setTimeout(checkUsername,350)});
 $('#rb').onclick=async()=>{
- const n=$('#rn').value.trim(),m=$('#rm').value.trim(),p=$('#rp').value.trim(),pw=$('#rpass').value,un=$('#ru').value.trim(),er=$('#rer');
+ const n=$('#rn').value.trim(),m=$('#rm').value.trim(),p=$('#rp').value.trim(),pw=$('#rpass').value,pw2=$('#rpass2').value,un=$('#ru').value.trim(),er=$('#rer');
  if(n.length<2||! /^\S+@\S+\.\S+$/.test(m)||! /^[\d+\s-]{9,15}$/.test(p)){er.textContent='Please enter your name, a valid email and a phone number.';return}
  if(pw.length<6){er.textContent='Your password must be at least 6 characters.';return}
+ if(pw!==pw2){er.textContent='Your passwords do not match. Please check both fields.';return}
  if(!await checkUsername()){er.textContent='Please choose an available username before continuing.';return}
  $('#rb').disabled=true;$('#rb').textContent='Creating account…';
- const {error}=await supabase.auth.signUp({email:m,password:pw,options:{data:{username:un,full_name:n,phone:p}}});
- $('#rb').disabled=false;$('#rb').textContent='Create account & get credentials';
- if(error){er.textContent=error.message;return}
+ let result;
+ try{result=await supabase.auth.signUp({email:m,password:pw,options:{data:{username:un,full_name:n,phone:p}}})}
+ catch(e){result={error:e}}
+ $('#rb').disabled=false;$('#rb').textContent='Create account';
+ if(result.error){const message=result.error.message||'Please try again.';er.textContent=/rate.?limit|email.*limit|too many requests/i.test(message)?'Email sending limit reached. Please wait before retrying, or contact the institute to finish setting up email delivery.':message;return}
  er.textContent='';$('#cred').hidden=false;$('#gu').textContent=un;
- ['rn','rm','rp','rpass','ru'].forEach(i=>$('#'+i).value='');
+ ['rn','rm','rp','rpass','rpass2','ru'].forEach(i=>$('#'+i).value='');
 };
-$('#goin').onclick=()=>mode('signin','Account created. Confirm your email if prompted, then sign in.');
+$('#goin').onclick=()=>{mode('signin','Account created. If email confirmation is enabled, confirm your address before signing in.');$('#su').value=$('#rm').value.trim()};
 $('#sb').onclick=async()=>{
  const email=$('#su').value.trim(),password=$('#sp').value,er=$('#ser');
  if(password.length<6){er.textContent='Password must be at least 6 characters.';return}
  $('#sb').disabled=true;$('#sb').textContent='Signing in…';
  const {data,error}=await supabase.auth.signInWithPassword({email,password});
  $('#sb').disabled=false;$('#sb').textContent='Sign in';
- if(error){er.className='err';er.textContent=error.message;return}
+ if(error){er.className='err';er.textContent=/rate.?limit|too many requests/i.test(error.message)?'Too many sign-in attempts. Please wait briefly and try again.':error.message;return}
  const {data:profile,error:pe}=await supabase.from('profiles').select('username,full_name,phone,created_at').eq('id',data.user.id).single();
  if(pe){er.textContent='Signed in, but your student profile could not be loaded. Please contact support.';return}
  $('#sp').value='';closeAuth('ACCESS GRANTED',()=>setUser({...profile,email:data.user.email}));
