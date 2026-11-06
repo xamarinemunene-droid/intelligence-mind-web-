@@ -229,6 +229,7 @@ $('#x').onclick=()=>closeAuth('CLOSING');
 addEventListener('keydown',e=>{if(e.key==='Escape'){$('#pm').classList.remove('on');if($('#auth').classList.contains('on'))closeAuth('CLOSING')}
   if(e.key==='Enter'){const p=e.target.closest&&e.target.closest('.panel');if(p)p.querySelector('.btn.p.full').click()}});
 document.addEventListener('click',e=>{const toggle=e.target.closest('[data-toggle-password]');if(!toggle)return;const input=document.getElementById(toggle.dataset.togglePassword);if(!input)return;const visible=input.type==='password';input.type=visible?'text':'password';toggle.textContent=visible?'Hide':'Show';toggle.setAttribute('aria-label',visible?'Hide password':'Show password')});
+let pendingSignupEmail='';
 let usernameTimer=null;
 async function checkUsername(){
  const value=$('#ru').value.trim(),box=$('#rue');
@@ -248,6 +249,7 @@ $('#rb').onclick=async()=>{
  if(pw!==pw2){er.textContent='Your passwords do not match. Please check both fields.';return}
  if(!await checkUsername()){er.textContent='Please choose an available username before continuing.';return}
  $('#rb').disabled=true;$('#rb').textContent='Creating account…';
+ pendingSignupEmail=m;
  let result;
  try{result=await supabase.auth.signUp({email:m,password:pw,options:{data:{username:un,full_name:n,phone:p}}})}
  catch(e){result={error:e}}
@@ -256,7 +258,7 @@ $('#rb').onclick=async()=>{
  er.textContent='';$('#cred').hidden=false;$('#gu').textContent=un;
  ['rn','rm','rp','rpass','rpass2','ru'].forEach(i=>$('#'+i).value='');
 };
-$('#goin').onclick=()=>{mode('signin','Account created. If email confirmation is enabled, confirm your address before signing in.');$('#su').value=$('#rm').value.trim()};
+$('#goin').onclick=()=>{mode('signin','Account created. If email confirmation is enabled, confirm your address before signing in.');$('#su').value=pendingSignupEmail};
 $('#sb').onclick=async()=>{
  const email=$('#su').value.trim(),password=$('#sp').value,er=$('#ser');
  if(password.length<6){er.textContent='Password must be at least 6 characters.';return}
